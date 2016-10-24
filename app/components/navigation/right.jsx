@@ -3,6 +3,9 @@ import connectToStores from 'alt-utils/lib/connectToStores';
 import { Nav, NavItem } from 'react-bootstrap';
 import ApplicationActions from 'actions/application';
 import session from 'services/session';
+import { Link } from 'react-router';
+import { paths } from 'helpers/routes';
+import { LinkContainer } from 'react-router-bootstrap';
 
 @connectToStores
 export default class NavigationRight extends Component {
@@ -30,6 +33,10 @@ export default class NavigationRight extends Component {
     session.delete();
   }
 
+  profile() {
+    alert('profile')
+  }
+
   render() {
     if (session.loggedIn()) {
       return (
@@ -37,6 +44,11 @@ export default class NavigationRight extends Component {
           <NavItem onClick={ this.create }>
             New Task
           </NavItem>
+          <LinkContainer to={ paths.profile() }>
+            <NavItem >
+              Profile
+            </NavItem>
+          </LinkContainer>
           <NavItem onClick={ this.signOut }>
             Sign out
           </NavItem>

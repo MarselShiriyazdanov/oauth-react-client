@@ -8,6 +8,7 @@ import Application from 'components/application';
 import Main from 'components/main';
 import About from 'components/about';
 import Article from 'components/article';
+import Profile from 'components/profile';
 
 render((
   <Router history={ appHistory }>
@@ -20,6 +21,7 @@ render((
       >
         <Route path="extended/:id" component={ Article }/>
       </Route>
+      <Route path="profile" component={ Profile }/>
       <Redirect from="*" to="/"/>
     </Route>
   </Router>
