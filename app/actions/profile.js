@@ -1,5 +1,6 @@
 import Alt from 'altFlux';
 import { createActions } from 'alt-utils/lib/decorators';
+import profileSource from 'sources/profile';
 
 @createActions(Alt)
 export default class ProfileActions {
@@ -9,16 +10,13 @@ export default class ProfileActions {
 
   get() {
     return (dispatch) => {
-      let current_user = {
-        first_name: 'test',
-        last_name: '',
-        gender: '',
-        email: '',
-        current_password: '',
-        password: '',
-        password_confirmation: ''
-      };
-      dispatch(current_user);
-    }
+      profileSource.get().then(response => {
+        if (response.status == 200) {
+          response.json().then(user => { dispatch(user); });
+        } else {
+          console.log("failed");
+        }
+      });
+    };
   }
 }

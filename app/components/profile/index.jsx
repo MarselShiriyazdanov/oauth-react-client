@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import connectToStores from 'alt-utils/lib/connectToStores';
 import {
   Grid,
@@ -15,18 +15,6 @@ import ProfileStore from 'stores/profile';
 
 @connectToStores
 export default class Profile extends Component {
-
-  static propTypes = {
-    current_user: PropTypes.shape({
-      first_name: PropTypes.string,
-      last_name: PropTypes.string,
-      gender: PropTypes.string,
-      email: PropTypes.string,
-      current_password: PropTypes.string,
-      password: PropTypes.string,
-      password_confirmation: PropTypes.string
-    })
-  }
 
   static getStores(props) {
     return [ProfileStore];
