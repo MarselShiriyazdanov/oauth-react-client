@@ -11,7 +11,10 @@ export default class ProfileStore {
 
     this.bindListeners({
       setValue: ProfileActions.SET_VALUE,
-      get: ProfileActions.GET
+      get: ProfileActions.GET,
+      updated: ProfileActions.UPDATED,
+      updateFailed: ProfileActions.UPDATE_FAILED,
+      clearMessage: ProfileActions.CLEAR_MESSAGE
     });
   }
 
@@ -19,7 +22,28 @@ export default class ProfileStore {
     this.current_user[obj.name] = obj.value;
   }
 
-  get(user) {
-    this.current_user = user;
+  get(response) {
+    this.current_user = response.user;
+  }
+
+  updated(response) {
+    this.successMessage = "Profile successfuly updated";
+  }
+
+  updateFailed(response) {
+    window.res = response;
+    let messages = [];
+    for (let key of Object.keys(response.validations)) {
+      messages.push(key + " " + response.validations[key])
+    }
+    this.errorMessage = messages;
+  }
+
+  clearMessage(messageType) {
+    if (messageType == "success") {
+      this.successMessage = undefined;
+    } else {
+      this.errorMessage = undefined;
+    }
   }
 }

@@ -1,6 +1,6 @@
 module.exports = {
-  target: 'http://localhost:8000',
-  apiTarget: 'http://localhost:8000/v1',
+  target: 'http://localhost:5000',
+  apiTarget: 'http://localhost:5000/v1',
   apiPath: '/v1',
   storageKey: 'user_session',
   session: {

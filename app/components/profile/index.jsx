@@ -7,7 +7,8 @@ import {
   Button,
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
+  Alert
 } from 'react-bootstrap';
 
 import ProfileActions from 'actions/profile';
@@ -30,18 +31,67 @@ export default class Profile extends Component {
 
   submit = (event) => {
     event.preventDefault();
+    if (this.isValid()) {
+      ProfileActions.update(this.props.current_user);
+    }
   }
 
   setValue(event) {
     ProfileActions.setValue(event.target.name, event.target.value);
   }
 
-  validationState(value) {
+  validatePassword(value) {
     return value.length >= 6 ? 'success' : 'error';
   }
 
+  validateInput(value) {
+    return value.length >= 1 ? 'success' : 'error';
+  }
+
+  isValidPassword() {
+    return this.props.current_user.password.length == 0 ||
+      (this.props.current_user.password === this.props.current_user.password_confirmation);
+  }
+
+  passwordValidationState(value) {
+    return this.isValidPassword() ? 'success' : 'error';
+  }
+
+  isValid() {
+    const user = this.props.current_user;
+
+    return (
+      user.first_name.length &&
+      user.email.length >= 6 &&
+      user.last_name.length &&
+      user.current_password &&
+      this.isValidPassword()
+    );
+  }
+
+
   loaded = () => {
     return Object.getOwnPropertyNames(this.props.current_user).length != 0;
+  }
+
+  clearError = () => {
+    ProfileActions.clearMessage("error")
+  }
+
+  clearSuccess = () => {
+    ProfileActions.clearMessage("success")
+  }
+
+  errorMessage = () => {
+    if (this.props.errorMessage) {
+      return <Alert bsStyle="danger" onDismiss={ this.clearError } >{ this.props.errorMessage }</Alert>;
+    }
+  }
+
+  successMessage = () => {
+    if (this.props.successMessage) {
+      return <Alert bsStyle="success" onDismiss={ this.clearSuccess } >{ this.props.successMessage }</Alert>;
+    }
   }
 
   render() {
@@ -55,22 +105,24 @@ export default class Profile extends Component {
           </Row>
           <Row className="show-grid">
             <Col md={ 8 }>
+              {this.successMessage()}
+              {this.errorMessage()}
               <form onSubmit={ this.submit }>
-                <FormGroup controlId="first_name">
+                <FormGroup controlId="first_name" validationState={ this.validateInput(this.props.current_user.first_name) }>
                   <ControlLabel>First name</ControlLabel>
                   <FormControl type="text" name="first_name"
                     value={ this.props.current_user.first_name }
                     onChange={ this.setValue }
                   />
                 </FormGroup>
-                <FormGroup controlId="last_name">
+                <FormGroup controlId="last_name" validationState={ this.validateInput(this.props.current_user.last_name) }>
                   <ControlLabel>Last name</ControlLabel>
                   <FormControl type="text" name="last_name"
                     value={ this.props.current_user.last_name }
                     onChange={ this.setValue }
                   />
                 </FormGroup>
-                <FormGroup controlId="email">
+                <FormGroup controlId="email" validationState={ this.validateInput(this.props.current_user.email) } >
                   <ControlLabel>Email</ControlLabel>
                   <FormControl type="email" name="email"
                     value={ this.props.current_user.email }
@@ -79,12 +131,12 @@ export default class Profile extends Component {
                 </FormGroup>
                 <FormGroup controlId="gender">
                   <ControlLabel>Gender</ControlLabel>
-                  <FormControl componentClass="text" name="gender"
+                  <FormControl type="gender" name="gender"
                     value={ this.props.current_user.gender }
                     onChange={ this.setValue }
                   />
                 </FormGroup>
-                <FormGroup controlId="current_password" validationState={ this.validationState(this.props.current_user.current_password) }>
+                <FormGroup controlId="current_password" validationState={ this.validatePassword(this.props.current_user.current_password) }>
                   <ControlLabel>Current password</ControlLabel>
                   <FormControl type="password" name="current_password"
                     value={ this.props.current_user.current_password }
@@ -98,7 +150,7 @@ export default class Profile extends Component {
                     onChange={ this.setValue }
                   />
                 </FormGroup>
-                <FormGroup controlId="password_confirmation">
+                <FormGroup controlId="password_confirmation" validationState = { this.passwordValidationState(this.props.current_user.password_confirmation) } >
                   <ControlLabel>Password Confirmation</ControlLabel>
                   <FormControl type="password" name="password_confirmation"
                     value={ this.props.current_user.password_confirmation }

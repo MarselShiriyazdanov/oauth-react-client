@@ -5,7 +5,8 @@ import {
   Button,
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
+  Alert
 } from 'react-bootstrap';
 import session from 'services/session';
 import ApplicationActions from 'actions/application';
@@ -58,6 +59,9 @@ export default class SigninModal extends Component {
   }
 
   render() {
+    if (this.props.modalOptions.error) {
+      this.error_message = <Alert bsStyle="danger">{this.props.modalOptions.error}</Alert>;
+    }
     return (
       <Modal
         bsSize="small"
@@ -67,6 +71,8 @@ export default class SigninModal extends Component {
         <Modal.Header closeButton>
           <h3 className="modal-title">Sign In</h3>
         </Modal.Header>
+
+        {this.error_message}
 
         <form onSubmit={ this.signIn }>
           <Modal.Body>

@@ -19,15 +19,19 @@ export default class Session {
     SessionActions.create(user);
   }
 
+  static login(user) {
+    SessionActions.login(user);
+  }
+
   static delete() {
     SessionActions.delete(this.currentUser());
   }
 
   static get token() {
-    return this.currentUser()[config.session.tokenKey];
+    return this.currentUser().user[config.session.tokenKey];
   }
 
   static get email() {
-    return this.currentUser()[config.session.emailKey];
+    return this.currentUser().user[config.session.emailKey];
   }
 }

@@ -5,7 +5,8 @@ import {
   Button,
   FormGroup,
   FormControl,
-  ControlLabel
+  ControlLabel,
+  Alert
 } from 'react-bootstrap';
 import SignupActions from 'actions/signup';
 import ApplicationActions from 'actions/application';
@@ -17,10 +18,11 @@ export default class SignupModal extends Component {
   static propTypes = {
     isModalOpen: PropTypes.bool,
     user: PropTypes.shape({
-      name: PropTypes.string,
+      first_name: PropTypes.string,
+      last_name: PropTypes.string,
       email: PropTypes.string,
       password: PropTypes.string,
-      passwordConfirmation: PropTypes.string
+      password_confirmation: PropTypes.string
     })
   }
 
@@ -52,16 +54,16 @@ export default class SignupModal extends Component {
     const user = this.props.user;
 
     return (
-      user.name.trim().length &&
+      user.first_name.trim().length &&
       user.email.length >= 6 &&
       user.password.length >= 6 &&
-      user.passwordConfirmation.length >= 6 &&
+      user.password_confirmation.length >= 6 &&
       this.isValidPassword()
     );
   }
 
   isValidPassword() {
-    return this.props.user.password === this.props.user.passwordConfirmation;
+    return this.props.user.password === this.props.user.password_confirmation;
   }
 
   validationState(value) {
@@ -77,6 +79,19 @@ export default class SignupModal extends Component {
   }
 
   render() {
+    if (this.props.modalOptions.error) {
+      let messages = [];
+      for (let key of Object.keys(this.props.modalOptions.error.validations)) {
+        messages.push(<li>{ key } { this.props.modalOptions.error.validations[key] }</li>)
+      }
+      this.errors =
+        <Alert bsStyle="danger">
+          <ul>
+            { messages }
+          </ul>
+        </Alert>;
+    }
+
     return (
       <Modal
         bsSize="small"
@@ -87,16 +102,29 @@ export default class SignupModal extends Component {
           <h3 className="modal-title">Sign Up</h3>
         </Modal.Header>
 
+        {this.errors}
+
         <form onSubmit={ this.signUp }>
           <Modal.Body>
             <FormGroup
-              controlId="name"
-              validationState={ this.nameValidationState(this.props.user.name) }
+              controlId="First name"
+              validationState={ this.nameValidationState(this.props.user.first_name) }
             >
-              <ControlLabel>Name</ControlLabel>
+              <ControlLabel>First Name</ControlLabel>
               <FormControl
                 type="text"
-                name="name"
+                name="first_name"
+                onChange={ this.setValue }
+              />
+            </FormGroup>
+            <FormGroup
+              controlId="Last name"
+              validationState={ this.nameValidationState(this.props.user.last_name) }
+            >
+              <ControlLabel>Last Name</ControlLabel>
+              <FormControl
+                type="text"
+                name="last_name"
                 onChange={ this.setValue }
               />
             </FormGroup>
@@ -123,13 +151,13 @@ export default class SignupModal extends Component {
               />
             </FormGroup>
             <FormGroup
-              controlId="passwordConfirmation"
-              validationState={ this.passwordValidationState(this.props.user.passwordConfirmation) }
+              controlId="password_confirmation"
+              validationState={ this.passwordValidationState(this.props.user.password_confirmation) }
             >
               <ControlLabel>Password Confirmation</ControlLabel>
               <FormControl
                 type="password"
-                name="passwordConfirmation"
+                name="password_confirmation"
                 onChange={ this.setValue }
               />
             </FormGroup>

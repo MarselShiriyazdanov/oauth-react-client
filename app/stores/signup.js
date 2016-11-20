@@ -8,10 +8,11 @@ export default class SignupStore {
   static displayName = 'SignupStore'
 
   defaultProps = {
-    name: '',
+    first_name: '',
+    last_name: '',
     email: '',
     password: '',
-    passwordConfirmation: ''
+    password_confirmation: ''
   }
 
   constructor() {
