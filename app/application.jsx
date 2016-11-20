@@ -21,7 +21,7 @@ render((
       >
         <Route path="extended/:id" component={ Article }/>
       </Route>
-      <Route path="profile" component={ Profile }/>
+      <Route path="profile" component={ Profile } onEnter={ requireAuth }/>
       <Redirect from="*" to="/"/>
     </Route>
   </Router>

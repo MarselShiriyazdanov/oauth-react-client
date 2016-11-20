@@ -28,10 +28,10 @@ export default class Session {
   }
 
   static get token() {
-    return this.currentUser().user[config.session.tokenKey];
+    return this.currentUser()[config.session.tokenKey];
   }
 
   static get email() {
-    return this.currentUser().user[config.session.emailKey];
+    return this.currentUser()[config.session.emailKey];
   }
 }

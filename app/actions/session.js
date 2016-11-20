@@ -15,17 +15,17 @@ export default class SessionActions {
         if (result.error) {
           ApplicationActions.openModal({ name: 'signIn', error: result.error.error });
         } else {
-          Storage.set(STORAGE_KEY, result);
-          dispatch(result);
+          Storage.set(STORAGE_KEY, result.user);
+          dispatch(result.user);
         }
       });
     };
   }
 
-  login(user) {
+  login(result) {
     return (dispatch) => {
-      Storage.set(STORAGE_KEY, user);
-      dispatch(user);
+      Storage.set(STORAGE_KEY, result.user);
+      dispatch(result.user);
     };
   }
 
