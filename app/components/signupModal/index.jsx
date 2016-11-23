@@ -6,12 +6,14 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-  Alert
+  Alert,
+  Col
 } from 'react-bootstrap';
 import SignupActions from 'actions/signup';
 import ApplicationActions from 'actions/application';
 import SignupStore from 'stores/signup';
 import ApplicationStore from 'stores/application';
+import SocialLinks from 'components/socialLinks';
 
 @connectToStores
 export default class SignupModal extends Component {
@@ -164,12 +166,16 @@ export default class SignupModal extends Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button
-              bsStyle="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
+            <SocialLinks googleLinkText="SignUp with Google" facebookLinkText="SignUp with Facebook"/>
+            <Col md={ 4 } >
+              <Button
+                bsStyle="primary"
+                type="submit"
+                className="pull-right"
+              >
+                Submit
+              </Button>
+            </Col>
           </Modal.Footer>
         </form>
       </Modal>

@@ -13,6 +13,8 @@ import ApplicationActions from 'actions/application';
 import SigninActions from 'actions/signin';
 import ApplicationStore from 'stores/application';
 import SigninStore from 'stores/signin';
+import GoogleActions from 'actions/google';
+import SocialLinks from 'components/socialLinks';
 
 @connectToStores
 export default class SigninModal extends Component {
@@ -102,12 +104,16 @@ export default class SigninModal extends Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button
-              bsStyle="primary"
-              type="submit"
-            >
-              Submit
-            </Button>
+            <SocialLinks googleLinkText="SignIn with Google" facebookLinkText="SignIn with Facebook"/>
+            <Col md={ 4 } >
+              <Button
+                bsStyle="primary"
+                type="submit"
+                className="pull-right"
+              >
+                Submit
+              </Button>
+            </Col>
           </Modal.Footer>
         </form>
       </Modal>
