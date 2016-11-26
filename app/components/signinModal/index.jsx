@@ -6,7 +6,8 @@ import {
   FormGroup,
   FormControl,
   ControlLabel,
-  Alert
+  Alert,
+  Col
 } from 'react-bootstrap';
 import session from 'services/session';
 import ApplicationActions from 'actions/application';

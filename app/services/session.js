@@ -23,6 +23,10 @@ export default class Session {
     SessionActions.login(user);
   }
 
+  static isPasswordSet() {
+    return (this.currentUser() && this.currentUser().reset_password_token == null);
+  }
+
   static delete() {
     SessionActions.delete(this.currentUser());
   }

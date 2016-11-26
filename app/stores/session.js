@@ -16,7 +16,8 @@ export default class SessionStore {
     this.bindListeners({
       create: SessionActions.CREATE,
       delete: SessionActions.DELETE,
-      login: SessionActions.LOGIN
+      login: SessionActions.LOGIN,
+      deleteResetPasswordToken: SessionActions.DELETE_RESET_PASSWORD_TOKEN
     });
   }
 
@@ -30,5 +31,10 @@ export default class SessionStore {
 
   delete() {
     this.currentUser = {};
+  }
+
+  deleteResetPasswordToken() {
+    this.currentUser.reset_password_token = null;
+    Storage.set(STORAGE_KEY, this.currentUser);
   }
 }

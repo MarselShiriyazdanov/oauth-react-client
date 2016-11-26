@@ -6,6 +6,7 @@ import session from 'services/session';
 import { Link } from 'react-router';
 import { paths } from 'helpers/routes';
 import { LinkContainer } from 'react-router-bootstrap';
+import appHistory from 'services/history';
 
 @connectToStores
 export default class NavigationRight extends Component {
@@ -31,10 +32,7 @@ export default class NavigationRight extends Component {
 
   signOut() {
     session.delete();
-  }
-
-  profile() {
-    alert('profile')
+    appHistory.push('/');
   }
 
   render() {

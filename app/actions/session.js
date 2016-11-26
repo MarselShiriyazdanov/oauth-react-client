@@ -36,4 +36,8 @@ export default class SessionActions {
       dispatch(user);
     };
   }
+
+  deleteResetPasswordToken() {
+    return true;
+  }
 }

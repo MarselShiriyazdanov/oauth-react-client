@@ -3,16 +3,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, Redirect } from 'react-router';
 import appHistory from 'services/history';
-import { requireAuth } from 'helpers/routes';
+import { requireAuth, checkPassword } from 'helpers/routes';
 import Application from 'components/application';
 import Main from 'components/main';
 import About from 'components/about';
 import Article from 'components/article';
 import Profile from 'components/profile';
+import Password from 'components/password';
 
 render((
   <Router history={ appHistory }>
-    <Route component={ Application }>
+    <Route component={ Application } onEnter={ checkPassword }>
       <Route path="/" component={ Main }/>
       <Route
         path="about"
@@ -22,6 +23,7 @@ render((
         <Route path="extended/:id" component={ Article }/>
       </Route>
       <Route path="profile" component={ Profile } onEnter={ requireAuth }/>
+      <Route path="password" component={ Password } onEnter={ requireAuth }/>
       <Redirect from="*" to="/"/>
     </Route>
   </Router>
