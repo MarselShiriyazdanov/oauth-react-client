@@ -31,7 +31,6 @@ export default class ProfileStore {
   }
 
   updateFailed(response) {
-    window.res = response;
     let messages = [];
     for (let key of Object.keys(response.validations)) {
       messages.push(key + " " + response.validations[key])

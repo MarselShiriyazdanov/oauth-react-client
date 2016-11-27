@@ -13,6 +13,7 @@ import {
 
 import ProfileActions from 'actions/profile';
 import ProfileStore from 'stores/profile';
+import Identity from 'components/identity';
 
 @connectToStores
 export default class Profile extends Component {
@@ -104,7 +105,7 @@ export default class Profile extends Component {
             </Col>
           </Row>
           <Row className="show-grid">
-            <Col md={ 8 }>
+            <Col md={ 7 }>
               {this.successMessage()}
               {this.errorMessage()}
               <form onSubmit={ this.submit }>
@@ -162,6 +163,7 @@ export default class Profile extends Component {
                 </Button>
               </form>
             </Col>
+            <Identity identities={ this.props.current_user.identities }/>
           </Row>
         </Grid>
       );

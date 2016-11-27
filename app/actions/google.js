@@ -4,6 +4,7 @@ import GoogleSource from 'sources/google';
 import ApplicationActions from 'actions/application';
 import session from 'services/session';
 import appHistory from 'services/history';
+import IdentityActions from 'actions/identity';
 
 @createActions(Alt)
 export default class GoogleActions {
@@ -13,6 +14,8 @@ export default class GoogleActions {
         if (response.status == 200) {
           response.json().then(user => {
             session.login(user);
+            // adds identities after connect account click
+            IdentityActions.setIdentities(user.user);
             if (!session.isPasswordSet()) {
               appHistory.push('/password');
             };

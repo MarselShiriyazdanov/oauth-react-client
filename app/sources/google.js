@@ -1,5 +1,5 @@
 import config from 'config';
-import request from 'lib/request';
+import requestAuth from 'lib/requestAuth';
 
 export default class GoogleSource {
   static url = `${config.target}/users/auth/google_oauth2/callback`;
@@ -11,6 +11,6 @@ export default class GoogleSource {
     let authData = Object.keys(authRepsonse).map(function(key) {
       return key + '=' + authRepsonse[key];
     }).join('&');
-    return request(`${this.url}?${authData}`, { method: 'GET' });
+    return requestAuth(`${this.url}?${authData}`, { method: 'GET' });
   }
 }
