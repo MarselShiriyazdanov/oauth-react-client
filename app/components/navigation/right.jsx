@@ -31,6 +31,7 @@ export default class NavigationRight extends Component {
   }
 
   signOut() {
+    FB.logout()
     session.delete();
     appHistory.push('/');
   }
