@@ -10,6 +10,7 @@ import About from 'components/about';
 import Article from 'components/article';
 import Profile from 'components/profile';
 import Password from 'components/password';
+import EmailConfirmation from 'components/email_confirmation';
 
 render((
   <Router history={ appHistory }>
@@ -24,6 +25,7 @@ render((
       </Route>
       <Route path="profile" component={ Profile } onEnter={ requireAuth }/>
       <Route path="password" component={ Password } onEnter={ requireAuth }/>
+      <Route path="users/confirmation" component={ EmailConfirmation }/>
       <Redirect from="*" to="/"/>
     </Route>
   </Router>
