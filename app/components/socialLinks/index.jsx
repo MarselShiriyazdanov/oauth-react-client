@@ -11,7 +11,7 @@ export default class SocialLinks extends Component {
       immediate: false,
       response_type: 'code',
       cookie_policy: 'single_host_origin',
-      client_id: "client_id",
+      client_id: "173494777873-fpeo1ej4tb5p3k5h13asnbb559o14u1k.apps.googleusercontent.com",
       scope: 'email profile'
     }, GoogleActions.auth);
   }
