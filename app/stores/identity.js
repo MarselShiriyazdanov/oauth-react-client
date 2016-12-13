@@ -20,7 +20,7 @@ export default class IdentityStore {
   delete(params) {
     let identity = params.identity;
     let identities = params.identities;
-    identities.splice(identities.findIndex(item => item === identity.id), 1);
-    this.setIdentities(identities);
+    let without_deleted = identities.filter(item => item.id != identity.id);
+    this.setIdentities(without_deleted);
   }
 }
