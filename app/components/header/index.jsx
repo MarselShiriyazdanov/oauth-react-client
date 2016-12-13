@@ -15,7 +15,7 @@ export default class Header extends Component {
       <Navbar>
         <Navbar.Header>
           <Navbar.Brand>
-            React-base
+            React-base oauth app
           </Navbar.Brand>
         </Navbar.Header>
         <NavigationLeft items={ links }/>

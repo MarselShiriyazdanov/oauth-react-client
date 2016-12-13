@@ -18,10 +18,6 @@ export default class NavigationRight extends Component {
     return session.store().getState();
   }
 
-  create() {
-    ApplicationActions.openModal({ name: 'todo' });
-  }
-
   signIn() {
     ApplicationActions.openModal({ name: 'signIn' });
   }
@@ -40,9 +36,6 @@ export default class NavigationRight extends Component {
     if (session.loggedIn()) {
       return (
         <Nav pullRight>
-          <NavItem onClick={ this.create }>
-            New Task
-          </NavItem>
           <LinkContainer to={ paths.profile() }>
             <NavItem >
               Profile

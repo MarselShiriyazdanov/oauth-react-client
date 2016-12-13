@@ -13,11 +13,11 @@ describe('Main', () => {
   });
 
   describe('when session is created', () => {
-    it('renders TodoLayout component', () => {
+    it('renders LoggedInHome component', () => {
       spyOn(session, 'loggedIn').and.returnValue(true);
       const mainComponent = mount(<Main/>);
 
-      expect(mainComponent.contains(<TodoLayout/>)).toEqual(true);
+      expect(mainComponent.contains(<LoggedInHome/>)).toEqual(true);
     });
   });
 });
