@@ -14,7 +14,8 @@ export default class ProfileStore {
       get: ProfileActions.GET,
       updated: ProfileActions.UPDATED,
       updateFailed: ProfileActions.UPDATE_FAILED,
-      clearMessage: ProfileActions.CLEAR_MESSAGE
+      clearMessage: ProfileActions.CLEAR_MESSAGE,
+      reset: ProfileActions.RESET
     });
   }
 
@@ -44,5 +45,9 @@ export default class ProfileStore {
     } else {
       this.errorMessage = undefined;
     }
+  }
+
+  reset() {
+    this.current_user = {};
   }
 }

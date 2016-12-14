@@ -30,6 +30,10 @@ export default class Profile extends Component {
     ProfileActions.get();
   }
 
+  componentWillUnmount() {
+    ProfileActions.reset();
+  }
+
   submit = (event) => {
     event.preventDefault();
     if (this.isValid()) {

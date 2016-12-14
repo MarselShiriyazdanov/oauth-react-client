@@ -19,6 +19,10 @@ export default class Identity extends Component {
     return IdentityStore.getState();
   }
 
+  componentWillUnmount() {
+    IdentityActions.setIdentities({identities: []});
+  }
+
   delete = (identity) => {
     return function(event) {
       IdentityActions.delete(identity, this.props.identities);

@@ -47,4 +47,8 @@ export default class ProfileActions {
       dispatch(messageType);
     }
   }
+
+  reset() {
+    return {};
+  }
 }
