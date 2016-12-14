@@ -9,6 +9,8 @@ describe('NavigationRight', () => {
   describe('when user is signed in', () => {
     beforeEach(() => {
       spyOn(session, 'loggedIn').and.returnValue(true);
+      window.FB = {};
+      window.FB.logout = () => {};
     });
 
     it('renders NavigationRight with Nav and NavItem', () => {
