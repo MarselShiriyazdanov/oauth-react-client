@@ -5,9 +5,10 @@ import Identity from 'components/identity';
 import IdentityActions from 'actions/identity';
 
 describe('Identity', () => {
-  const IdentityComponent = mount(<Identity identities={ [{id: "1", uid: "facebook", provider: "facebook"}] } />);
+  const IdentityComponent = mount(<Identity />);
 
   beforeAll(() => {
+    IdentityComponent.setState({identities: [{id: "1", uid: "facebook", provider: "facebook"}]})
     spyOn(IdentityActions, 'delete');
   });
 

@@ -7,6 +7,8 @@ export default class IdentityStore {
   static displayName = 'IdentityStore';
 
   constructor() {
+    this.identities = [];
+
     this.bindListeners({
       setIdentities: IdentityActions.SET_IDENTITIES,
       delete: IdentityActions.DELETE

@@ -1,6 +1,7 @@
 import Alt from 'altFlux';
 import { createActions } from 'alt-utils/lib/decorators';
 import profileSource from 'sources/profile';
+import IdentityActions from 'actions/identity';
 
 @createActions(Alt)
 export default class ProfileActions {
@@ -12,7 +13,7 @@ export default class ProfileActions {
     return (dispatch) => {
       profileSource.get().then(response => {
         if (response.status == 200) {
-          response.json().then(user => { dispatch(user); });
+          response.json().then(user => { dispatch(user); IdentityActions.setIdentities(user.user); });
         } else {
           console.log("failed");
         }
