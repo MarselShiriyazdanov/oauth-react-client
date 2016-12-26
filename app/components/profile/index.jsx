@@ -167,7 +167,7 @@ export default class Profile extends Component {
                 </Button>
               </form>
             </Col>
-            <Identity identities={ this.props.current_user.identities }/>
+            <Identity />
           </Row>
         </Grid>
       );
