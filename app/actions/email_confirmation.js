@@ -5,20 +5,10 @@ import emailConfirmationSource from 'sources/email_confirmation';
 @createActions(Alt)
 export default class EmailConfirmationActions {
   confirm(token) {
-    emailConfirmationSource.confirm(token).then(response => {
-      if (response.status == 200) {
-        this.confirmationSuccess();
-      } else {
-        this.confirmationFailed();
-      };
-    });
-  }
-
-  confirmationFailed() {
-    return true;
-  }
-
-  confirmationSuccess() {
-    return true;
+    return (dispatch) => {
+      emailConfirmationSource.confirm(token).then(response => {
+        dispatch(response.status == 200);
+      });
+    }
   }
 }

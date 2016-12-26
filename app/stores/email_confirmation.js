@@ -8,18 +8,12 @@ export default class EmailConfirmationStore {
 
   constructor() {
     this.bindListeners({
-      confirmationFailed: EmailConfirmationActions.CONFIRMATION_FAILED,
-      confirmationSuccess: EmailConfirmationActions.CONFIRMATION_SUCCESS
+      confirm: EmailConfirmationActions.CONFIRM
     });
   }
 
-  confirmationFailed() {
-    this.confirmed = false;
-    this.unconfirmed = true;
-  }
-
-  confirmationSuccess() {
-    this.confirmed = true;
-    this.unconfirmed = false;
+  confirm(value) {
+    this.confirmed = value;
+    this.unconfirmed = !value;
   }
 }
